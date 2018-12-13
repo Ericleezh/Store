@@ -38,7 +38,7 @@
 						<li><a href="${pageContext.request.contextPath}/jsp/order_list.jsp">我的订单</a></li>
 						</c:if>
 						<c:if test="${empty user}">
-						<li>未登录,请先<a href="${pageContext.request.contextPath}/UserServlet?method=loginUI">登录</a></li>
+						<li>未登录,请先&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/UserServlet?method=loginUI">登录</a></li>
 						<li><a href="${pageContext.request.contextPath}/UserServlet?method=registUI">注册</a></li>
 						</c:if>
 						

@@ -109,4 +109,24 @@ public class UserServlet extends BaseServlet {
 		}
 		return "jsp/login.jsp";
 	}
+
+	/**
+	 * 检查用户名是否已经被注册
+	 * @throws IOException 
+	 * @throws SQLException 
+	 */
+	public void checkNameServlet(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
+		String username = req.getParameter("username");
+		
+		UserService userService = new UserServiceImpl();
+		Boolean is_exist= userService.checkNameExist(username);
+		resp.setCharacterEncoding("UTF-8");
+		resp.setHeader("Content-type", "text/html;charset=UTF-8");
+		
+		if (is_exist) {
+			resp.getWriter().write("该用户名已被注册");
+		} else {
+			resp.getWriter().write("该用户名可用");
+		}
+	}
 }

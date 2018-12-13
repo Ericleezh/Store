@@ -32,4 +32,11 @@ public class UserServiceImpl implements UserService{
 		UserDao userDao = new UserDaoImpl();
 		return userDao.userLogin(user);
 	}
+
+	@Override
+	public Boolean checkNameExist(String username) throws SQLException {
+		UserDao userDao = new UserDaoImpl();
+
+		return userDao.checkNameExist(username);
+	}
 }

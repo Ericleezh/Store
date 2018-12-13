@@ -33,11 +33,37 @@ font {
     padding: 0 10px;
 }
  </style>
+ 
+<script type="text/javascript">
+ function ajaxFunction() {
+	 var xmlHttp;
+	 if (window.XMLHttpRequest) {
+		xmlHttp = new XMLHttpRequest();
+	} else {
+		xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	return xmlHttp;
+}
+ 
+ function checkName() {
+	var username = document.getElementById("username").value;
+	var span = document.getElementById("span01");
+	
+	var request = ajaxFunction();
+	request.open("POST", "UserServlet?method=checkNameServlet", true);
+	
+	request.onreadystatechange = function () {
+		if (request.readyState == 4 && request.status == 200) {
+			span.innerHTML = request.responseText;
+		}
+	}
+	
+	request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	request.send("username=" + username);
+}
+ </script>
 </head>
 <body>
-
-
-
 
 			<!--
             	描述：菜单栏
@@ -115,8 +141,9 @@ font {
 			 <div class="form-group">
 			    <label for="username" class="col-sm-2 control-label">用户名</label>
 			    <div class="col-sm-6">
-			      <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名">
+			      <input type="text" class="form-control" name="username" id="username" onblur="checkName()" placeholder="请输入用户名">
 			    </div>
+			    <div id="span01" style="color: red; padding-top: 7px;"></div>
 			  </div>
 			   <div class="form-group">
 			    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
