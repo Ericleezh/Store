@@ -116,6 +116,7 @@ public class UserServlet extends BaseServlet {
 	 * @throws SQLException 
 	 */
 	public void checkNameServlet(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
+		
 		String username = req.getParameter("username");
 		
 		UserService userService = new UserServiceImpl();
@@ -128,5 +129,14 @@ public class UserServlet extends BaseServlet {
 		} else {
 			resp.getWriter().write("该用户名可用");
 		}
+	}
+
+	/**
+	 * 用户退出
+	 * @throws IOException 
+	 */
+	public void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		req.getSession().removeAttribute("user");
+		resp.sendRedirect("jsp/index.jsp");
 	}
 }

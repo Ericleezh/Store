@@ -51,7 +51,7 @@ public class MailUtils {
 		// message.setText("这是一封激活邮件，请<a href='#'>点击</a>");
 
 		String url="http://localhost:8080/Store/UserServlet?method=active&code="+emailMsg;
-		String content="<h1>来自购物天堂的激活邮件!激活请点击以下链接!</h1><h3><a href='"+url+"'>"+url+"</a></h3>";
+		String content="<h1>来自不知名杂货铺的激活邮件!激活请点击以下链接!</h1><h3><a href='"+url+"'>"+url+"</a></h3>";
 		//设置邮件内容
 		message.setContent(content, "text/html;charset=utf-8");
 

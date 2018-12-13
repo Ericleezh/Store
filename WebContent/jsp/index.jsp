@@ -33,7 +33,7 @@
 					<ol class="list-inline">
 						<c:if test="${not empty user}">
 						<li>欢迎您,${user.username }</li>
-						<li><a href="${pageContext.request.contextPath}/UserServlet?method=loginOut">退出</a></li>
+						<li><a href="${pageContext.request.contextPath}/UserServlet?method=logOut">退出</a></li>
 						<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
 						<li><a href="${pageContext.request.contextPath}/jsp/order_list.jsp">我的订单</a></li>
 						</c:if>
