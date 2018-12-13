@@ -7,10 +7,11 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>关于我们</title>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
+
 		<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
 		<!-- 引入自定义css文件 style.css -->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css"/>
 	</head>
 <body>
@@ -26,16 +27,17 @@
 				</div>
 				<div class="col-md-3" style="padding-top:20px">
 					<ol class="list-inline">
-					<c:if test="${empty loginUser }">
-						<li><a href="${pageContext.request.contextPath}/UserServlet?method=loginUI">登录</a></li>
-						<li><a href="${pageContext.request.contextPath}/UserServlet?method=registUI">注册</a></li>
-					</c:if>
-					<c:if test="${not empty loginUser }">
-						<li><a href="#">欢迎${loginUser.name }</a></li>
+						<c:if test="${not empty user}">
+						<li>欢迎您,${user.username }</li>
 						<li><a href="${pageContext.request.contextPath}/UserServlet?method=logOut">退出</a></li>
 						<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
-						<li><a href="${pageContext.request.contextPath}/OrderServlet?method=findOrdersByUidWithPage&num=1">我的订单</a></li>
-					</c:if>
+						<li><a href="${pageContext.request.contextPath}/jsp/order_list.jsp">我的订单</a></li>
+						</c:if>
+						<c:if test="${empty user}">
+						<li>未登录,请先&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/UserServlet?method=loginUI">登录</a></li>
+						<li><a href="${pageContext.request.contextPath}/UserServlet?method=registUI">注册</a></li>
+						</c:if>
+						
 					</ol>
 				</div>
 			</div>
@@ -58,12 +60,11 @@
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav" id="myUL">
-								<%-- 
-									<c:forEach items="${allCats}" var="c">
-										<li><a href="#">${c.cname}</a></li>
-									</c:forEach> 
-								--%>
+							<ul class="nav navbar-nav">
+								<li class="active"><a href="${pageContext.request.contextPath}/jsp/product_list.jsp">手机数码<span class="sr-only">(current)</span></a></li>
+								<li><a href="#">电脑办公</a></li>
+								<li><a href="#">电脑办公</a></li>
+								<li><a href="#">电脑办公</a></li>
 							</ul>
 							<form class="navbar-form navbar-right" role="search">
 								<div class="form-group">
