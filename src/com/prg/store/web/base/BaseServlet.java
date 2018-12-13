@@ -15,30 +15,30 @@ public class BaseServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//获取前端method参数
-		String md = request.getParameter("method");
+		String method = request.getParameter("method");
 		//防止找不到方法的情况
-		if (null == md || "".equals(md) || md.trim().equals("")) {
-			md = "execute";
+		if (null == method || "".equals(method) || method.trim().equals("")) {
+			method = "execute";
 		}
-		String path = null;
 		//获取到具体的继承类
 		Class clazz = this.getClass();
 		try {
-			Method method = clazz.getMethod(md, HttpServletRequest.class, HttpServletResponse.class);
-			if (method != null) {
+			Method md = clazz.getMethod(method, HttpServletRequest.class, HttpServletResponse.class);
+			if (md != null) {
 				//调用具体找到的方法，并返回方法的转发地址
-				path = (String)method.invoke(this, request, response);
+				String path = (String)md.invoke(this, request, response);
+				//在这里统一做转发
+				if (path != null) {
+					request.getRequestDispatcher(path).forward(request, response);
+				}
 			}
-			//在这里统一做转发
-			if (path != null) {
-				request.getRequestDispatcher(path).forward(request, response);
-			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+	public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		return null;
 	}
 }

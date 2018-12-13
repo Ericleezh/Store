@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>    
 <!doctype html>
 <html>
-<head>
+	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>关于我们</title>
@@ -13,6 +13,19 @@
 		<!-- 引入自定义css文件 style.css -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css"/>
+		
+		<script type="text/javascript">
+			$(function () {
+				var url = "${pageContext.request.contextPath}/CategoryServlet";
+				var obj = {"method":"findAllCats"}
+				$.post(url, obj, function(data) {
+					$.each(data, function(i, obj) {
+						var li = "<li><a href='#'>"+obj.cname+"</a></li>"
+						$("#c_id").append(li)
+					})
+				}, "json")
+			})
+		</script>
 	</head>
 <body>
 <!--
@@ -60,11 +73,11 @@
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav">
-								<li class="active"><a href="${pageContext.request.contextPath}/jsp/product_list.jsp">手机数码<span class="sr-only">(current)</span></a></li>
-								<li><a href="#">电脑办公</a></li>
-								<li><a href="#">电脑办公</a></li>
-								<li><a href="#">电脑办公</a></li>
+							<ul class="nav navbar-nav" id="c_id">
+<%-- 								<c:forEach items="${categorys }" var="c"> --%>
+<%-- 										<li><a href="#">${c.cname }</a></li>						 --%>
+<%-- 								</c:forEach> --%>
+								
 							</ul>
 							<form class="navbar-form navbar-right" role="search">
 								<div class="form-group">
@@ -80,20 +93,6 @@
 				</nav>
 			</div>
 </body>
-<script>
-$(function(){
-	$.post("${pageContext.request.contextPath}/CategoryServlet",{"method":"findAllCats"},function(dt){
-		// console.log(dt);
-		//<li><a href="#">${c.cname}</a></li>
-		//jquery遍历数据
-		$.each(dt,function(i,obj){
-			var li="<li><a href='${pageContext.request.contextPath}/ProductServlet?method=findProductsWithCidAndPage&num=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";
-			$("#myUL").append(li);
-		});		
-		
-	},"json");
-});
-</script>
 </html>
 
 
