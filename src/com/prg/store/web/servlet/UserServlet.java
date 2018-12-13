@@ -35,6 +35,11 @@ public class UserServlet extends BaseServlet {
 	public String userRegist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//接受表单参数
 		Map<String, String[]> map = req.getParameterMap();
+		//暂时没想到什么好的办法解决map为空时的问题
+		if (map.get("username")[0].isEmpty()) {
+			req.setAttribute("empty_msg", "信息不允许为空！");
+			return "/jsp/register.jsp";
+		}
 		User user = new User();
 		MyBeanUtils.populate(user, map);
 		//为用户的其他属性赋值

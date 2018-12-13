@@ -121,7 +121,7 @@ font {
 			      <input type="date" class="form-control" name="birthday">		      
 			    </div>
 			  </div>
-			  			  <div class="form-group">
+  			  <div class="form-group">
 			    <label for="date" class="col-sm-2 control-label">电话</label>
 			    <div class="col-sm-6">
 			      <input type="text" class="form-control" name="telephone">		      
@@ -145,6 +145,7 @@ font {
 			      <input type="submit"  width="100" value="注册" name="submit" border="0"
 				    style="background: url('${pageContext.request.contextPath}/img/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 				    height:35px;width:100px;color:white;">
+				    <span style="color: red;">${empty_msg }</span>
 			    </div>
 			  </div>
 			</form>
