@@ -1,27 +1,25 @@
 package com.prg.store.web.servlet;
 
+import com.prg.store.domain.Product;
+import com.prg.store.service.ProductService;
+import com.prg.store.service.impl.ProductServiceImpl;
 import com.prg.store.web.base.BaseServlet;
-import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class ProductServlet
- */
 @WebServlet("/ProductServlet")
 public class ProductServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public String findHots(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		// TODO Auto-generated method stub
-		return super.execute(req, resp);
+	public String productInfo(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		String pid = req.getParameter("pid");
+		ProductService productService = new ProductServiceImpl();
+		Product product= productService.findProductById(pid);
+		
+		req.setAttribute("product", product);
+		
+		return "/jsp/product_info.jsp";
 	}
-	
-	public String findNews(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		// TODO Auto-generated method stub
-		return super.execute(req, resp);
-	}
-	
 }

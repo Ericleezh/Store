@@ -20,4 +20,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findNews();
 	}
 
+	@Override
+	public Product findProductById(String pid) throws Exception {
+		return productDao.findProductById(pid);
+	}
+
 }

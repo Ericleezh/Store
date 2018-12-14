@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.prg.store.dao.ProductDao;
@@ -24,6 +25,13 @@ public class ProductDaoImpl implements ProductDao{
 		String sql = "select * from product where pflag = 0 order by pdate DESC limit 0,9";
 		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
 		return runner.query(sql, new BeanListHandler<Product>(Product.class));
+	}
+
+	@Override
+	public Product findProductById(String pid) throws Exception {
+		String sql = "select * from product where pid = ?";
+		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+		return runner.query(sql, new BeanHandler<Product>(Product.class), pid);
 	}
 
 }
