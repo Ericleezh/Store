@@ -14,18 +14,20 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" type="text/css"/>
 		
-		<script type="text/javascript">
-			$(function () {
-				var url = "${pageContext.request.contextPath}/CategoryServlet";
-				var obj = {"method":"findAllCats"}
-				$.post(url, obj, function(data) {
-					$.each(data, function(i, obj) {
-						var li = "<li><a href='#'>"+obj.cname+"</a></li>"
-						$("#c_id").append(li)
-					})
-				}, "json")
-			})
-		</script>
+<script>
+$(function(){
+	$.post("${pageContext.request.contextPath}/CategoryServlet",{"method":"findAllCats"},function(dt){
+		// console.log(dt);
+		//<li><a href="#">${c.cname}</a></li>
+		//jquery遍历数据
+		$.each(dt,function(i,obj){
+			var li="<li><a href='${pageContext.request.contextPath}/ProductServlet?method=findProductsWithCidAndPage&page=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";
+			$("#c_id").append(li);
+		});		
+		
+	},"json");
+});
+</script>
 	</head>
 <body>
 <!--
@@ -68,7 +70,7 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="${pageContext.request.contextPath}/IndexServlet">首页</a>
+							<a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/index.jsp">首页</a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
@@ -93,6 +95,20 @@
 				</nav>
 			</div>
 </body>
+<script>
+$(function(){
+	$.post("${pageContext.request.contextPath}/CategoryServlet",{"method":"findAllCats"},function(dt){
+		// console.log(dt);
+		//<li><a href="#">${c.cname}</a></li>
+		//jquery遍历数据
+		$.each(dt,function(i,obj){
+			var li="<li><a href='${pageContext.request.contextPath}/ProductServlet?method=findProductsWithCidAndPage&num=1&cid="+obj.cid+"'>"+obj.cname+"</a></li>";
+			$("#myUL").append(li);
+		});		
+		
+	},"json");
+});
+</script>
 </html>
 
 
