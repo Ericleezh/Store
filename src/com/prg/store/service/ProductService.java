@@ -15,4 +15,6 @@ public interface ProductService {
 
 	PageModel findProductsWithCidAndPage(String cid, int current_page) throws Exception;
 
+	List<Product> findHistoryProducts(String[] ids) throws Exception;
+
 }

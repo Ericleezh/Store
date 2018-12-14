@@ -39,4 +39,9 @@ public class ProductServiceImpl implements ProductService {
 		return pm;
 	}
 
+	@Override
+	public List<Product> findHistoryProducts(String[] ids) throws Exception {
+		return productDao.findHistoryProducts(ids);
+	}
+
 }

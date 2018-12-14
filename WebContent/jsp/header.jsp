@@ -70,7 +70,7 @@ $(function(){
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="${pageContext.request.contextPath}/jsp/index.jsp">首页</a>
+							<a class="navbar-brand" href="${pageContext.request.contextPath}/IndexServlet">首页</a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->

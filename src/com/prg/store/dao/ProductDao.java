@@ -16,4 +16,6 @@ public interface ProductDao {
 
 	List findProductsWithCidAndPage(String cid, int startIndex, int pageSize) throws Exception;
 
+	List<Product> findHistoryProducts(String[] ids) throws Exception;
+
 }

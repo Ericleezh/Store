@@ -1,16 +1,20 @@
 package com.prg.store.dao.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.lang.StringUtils;
 
 import com.prg.store.dao.ProductDao;
 import com.prg.store.domain.Product;
 import com.prg.store.utils.JDBCUtils;
+import com.sun.corba.se.spi.orb.StringPair;
 
 public class ProductDaoImpl implements ProductDao{
 
@@ -48,6 +52,21 @@ public class ProductDaoImpl implements ProductDao{
 		String sql = "select * from product where cid = ? limit ?,?";
 		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
 		return runner.query(sql, new BeanListHandler<Product>(Product.class), cid, startIndex, pageSize);
+	}
+
+	@Override
+	public List<Product> findHistoryProducts(String[] ids) throws Exception {
+		ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(ids));
+		String all_id = "";
+		if (arrayList.size() <= 7) {
+			all_id = StringUtils.join(arrayList.toArray(), ",");
+		} else {
+			all_id = StringUtils.join(Arrays.copyOfRange(ids, 0, 7),",");
+		}
+		
+		String sql = "select * from product where pid in ("+ all_id +") order by field(pid,"+all_id+")";
+		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+		return runner.query(sql, new BeanListHandler<Product>(Product.class));
 	}
 
 }

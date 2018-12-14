@@ -73,10 +73,13 @@
 			<div style="overflow: hidden;">
 
 				<ul style="list-style: none;">
-					<li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;"><img src="${pageContext.request.contextPath}/products/1/cs10001.jpg" width="130px" height="130px" /></li>
+					<c:forEach items="${history_list }" var="p">
+					<li style="width: 150px;height: 216;float: left;margin: 0 8px 0 0;padding: 0 18px 15px;text-align: center;"><a href="${pageContext.request.contextPath}/ProductServlet?method=productInfo&pid=${p.pid }"><img src="${pageContext.request.contextPath}/${p.pimage}" width="130px" height="130px" /></a></li>
+					</c:forEach>
 				</ul>
 
 			</div>
+			<a href="${pageContext.request.contextPath}/CleanRecordServlet?method=cleanHistory"><h4>清除浏览记录</h4></a>
 		</div>
 		<%@include  file="/jsp/footer.jsp"%>
 
