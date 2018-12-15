@@ -27,7 +27,7 @@ public class Cart {
 	/**
 	 * 获取map中的values
 	 */
-	public Collection getCartItems() {
+	public Collection<CartItem> getCartItems() {
 		return map.values();
 	}
 	

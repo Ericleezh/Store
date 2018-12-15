@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 @WebFilter("/*")
-public class EncodingFilter implements Filter {
+public class Filter01_Encoding implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {

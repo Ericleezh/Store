@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -99,13 +100,24 @@ public class UserServlet extends BaseServlet {
 	 */
 	public String userLogin(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
 		
+		//获取用户提交的个人信息
 		Map<String, String[]> map = req.getParameterMap();
+		//获取自动提交按钮
+		String auto_login = req.getParameter("auto_login");
+		
 		User user = new User();
 		MyBeanUtils.populate(user, map);
 		
 		UserService userService = new UserServiceImpl();
 		User user02 = userService.userLogin(user);
 		if (user02 != null) {
+			//点击了自动登录 
+			if ("on".equals(auto_login)) {
+				Cookie cookie = new Cookie("auto_login", user02.getUsername()+"#"+user02.getPassword());
+				cookie.setMaxAge(24*3600);
+				cookie.setPath(req.getContextPath());
+				resp.addCookie(cookie);
+			}
 			req.getSession().setAttribute("user", user02);
 			resp.sendRedirect("IndexServlet");
 			return null;
@@ -115,6 +127,8 @@ public class UserServlet extends BaseServlet {
 		return "jsp/login.jsp";
 	}
 
+	
+	
 	/**
 	 * 检查用户名是否已经被注册
 	 * @throws IOException 
