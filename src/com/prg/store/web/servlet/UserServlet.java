@@ -114,7 +114,7 @@ public class UserServlet extends BaseServlet {
 			//点击了自动登录 
 			if ("on".equals(auto_login)) {
 				Cookie cookie = new Cookie("auto_login", user02.getUsername()+"#"+user02.getPassword());
-				cookie.setMaxAge(24*3600);
+				cookie.setMaxAge(7*24*3600);
 				cookie.setPath(req.getContextPath());
 				resp.addCookie(cookie);
 			}

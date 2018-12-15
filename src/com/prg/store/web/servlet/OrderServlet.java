@@ -13,6 +13,7 @@ import com.prg.store.domain.Cart;
 import com.prg.store.domain.CartItem;
 import com.prg.store.domain.Order;
 import com.prg.store.domain.OrderItem;
+import com.prg.store.domain.PageModel;
 import com.prg.store.domain.User;
 import com.prg.store.service.OrderService;
 import com.prg.store.service.impl.OrderServiceImpl;
@@ -58,5 +59,24 @@ public class OrderServlet extends BaseServlet {
 		req.setAttribute("order", order);
 		//转发页面
 		return "/jsp/order_info.jsp";
+	}
+
+	public String findMyOrdersWithPage(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		//获取登录用户,当前页
+		User user = (User)req.getSession().getAttribute("user");
+		if (user == null) {
+			resp.getWriter().write("用戶不存在");
+			return null;
+		}
+		int current_page = Integer.parseInt(req.getParameter("page"));
+		
+		//调用业务层获取pagemodel对象
+		OrderService orderService = new OrderServiceImpl();
+		PageModel pm = orderService.findMyOrdersWithPage(current_page, user);
+		
+		//将pm对象放到request中
+		req.setAttribute("page", pm);
+		
+		return "/jsp/order_list.jsp";
 	}
 }
