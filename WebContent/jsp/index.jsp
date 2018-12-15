@@ -86,7 +86,7 @@
 							<a href="${pageContext.request.contextPath }/ProductServlet?method=productInfo&pid=${h.pid }">
 								<img src="${pageContext.request.contextPath}/${h.pimage }" width="130" height="130" style="display: inline-block;">
 							</a>
-							<p><a href="product_info.html" style="color:#666">${h.pname }</a></p>
+							<p><a href="${pageContext.request.contextPath }/ProductServlet?method=productInfo&pid=${h.pid }" style="color:#666">${h.pname }</a></p>
 							<p><font color="#E4393C" style="font-size:16px">&yen;${h.shop_price }</font></p>
 						</div>
 					</c:forEach>
@@ -122,7 +122,7 @@
 							<a href="${pageContext.request.contextPath }/ProductServlet?method=productInfo&pid=${n.pid }">
 								<img src="${pageContext.request.contextPath}/${n.pimage }" width="130" height="130" style="display: inline-block;">
 							</a>
-							<p><a href="product_info.html" style="color:#666">${n.pname }</a></p>
+							<p><a href="${pageContext.request.contextPath }/ProductServlet?method=productInfo&pid=${n.pid }" style="color:#666">${n.pname }</a></p>
 							<p><font color="#E4393C" style="font-size:16px">&yen;${n.shop_price }</font></p>
 						</div>
 					</c:forEach>
@@ -134,7 +134,6 @@
 			<div class="container-fluid">
 				<%@include file="/jsp/footer.jsp" %>
 			</div>
-		</div>
 	</body>
 
 </html>

@@ -24,6 +24,16 @@
 				height: 300px;
 			}
 		</style>
+		
+		<script type="text/javascript">
+		//由于表单内的按钮类型是button，无法提交数据
+		$(function() {
+			$("#add_product").click(function() {
+				var myForm = document.getElementById("myForm");
+				myForm.submit();
+			});
+		});
+		</script>
 	</head>
 
 	<body>
@@ -33,6 +43,7 @@
 
 
 		<div class="container">
+		<form id="myForm" action="${pageContext.request.contextPath }/CartServlet?method=addCartItemsToCart" method="post">
 			<div class="row">
 				<div style="border: 1px solid #e4e4e4;width:930px;margin-bottom:10px;margin:0 auto;padding:10px;margin-bottom:10px;">
 					<a href="${pageContext.request.contextPath}/">首页&nbsp;&nbsp;&gt;</a>
@@ -52,18 +63,18 @@
 						<div style="margin:10px 0 10px 0;">商城价: <strong style="color:#ef0101;">￥：${product.shop_price }元/份</strong> 参 考 价： <del>￥${product.market_price }元/份</del>
 						</div>
 
-						<div style="margin:10px 0 10px 0;">促销: <a target="_blank" title="限时抢购 (2014-07-30 ~ 2015-01-01)" style="background-color: #f07373;">限时抢购</a> </div>
+						<div style="margin:10px 0 10px 0;">促销: <a target="_blank" title="限时抢购 (2014-07-30 ~ 2015-01-01)" style="background-color: #f0.7373;">限时抢购</a> </div>
 
 						<div style="padding:10px;border:1px solid #e7dbb1;width:330px;margin:15px 0 10px 0;;background-color: #fffee6;">
 							<div style="margin:5px 0 10px 0;">白色</div>
 
 							<div style="border-bottom: 1px solid #faeac7;margin-top:20px;padding-left: 10px;">购买数量:
 								<input id="quantity" name="quantity" value="1" maxlength="4" size="10" type="text"> </div>
-
+								<input name="pid" value="${product.pid }" type="hidden"/>
 							<div style="margin:20px 0 10px 0;;text-align: center;">
 								<%--加入到购物车 --%>
-								<a href="${pageContext.request.contextPath}/jsp/cart.jsp">
-									<input style="background: url('${pageContext.request.contextPath}/img/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0);height:36px;width:127px;" value="加入购物车" type="button">
+								<a href="javascript:void(0)">
+									<input id="add_product" style="background: url('${pageContext.request.contextPath}/img/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0);height:36px;width:127px;" value="加入购物车" type="button">
 								</a> &nbsp;收藏商品</div>
 						</div>
 					</div>
@@ -132,6 +143,7 @@
 				</div>
 
 			</div>
+			</form>
 		</div>
 
 		<%@include  file="/jsp/footer.jsp"%>

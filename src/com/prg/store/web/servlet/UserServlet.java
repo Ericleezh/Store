@@ -107,7 +107,7 @@ public class UserServlet extends BaseServlet {
 		User user02 = userService.userLogin(user);
 		if (user02 != null) {
 			req.getSession().setAttribute("user", user02);
-			resp.sendRedirect("jsp/index.jsp");
+			resp.sendRedirect("IndexServlet");
 			return null;
 		} else {
 			req.setAttribute("msg", "用户名或密码错误");
@@ -142,6 +142,6 @@ public class UserServlet extends BaseServlet {
 	 */
 	public void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		req.getSession().removeAttribute("user");
-		resp.sendRedirect("jsp/index.jsp");
+		resp.sendRedirect("IndexServlet");
 	}
 }
