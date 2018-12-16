@@ -43,7 +43,7 @@
 								订单编号:${order.oid } &nbsp;&nbsp;&nbsp;&nbsp;
 								总金額:￥<font color="red">${order.total } </font>元  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								订单狀態:
-								<c:if test="${order.state == 1 }"><a href="">付款</a></c:if>
+								<c:if test="${order.state == 1 }"><a href="${pageContext.request.contextPath }/OrderServlet?method=findOrderByOId&OId=${order.oid}">付款</a></c:if>
 								<c:if test="${order.state == 2 }"><a>未發貨</a></c:if>
 								<c:if test="${order.state == 3 }"><a href="">簽收</a></c:if>
 								<c:if test="${order.state == 4 }"><a>已簽收</a></c:if>

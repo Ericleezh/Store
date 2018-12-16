@@ -14,7 +14,8 @@ import com.prg.store.service.OrderService;
 import com.prg.store.utils.JDBCUtils;
 
 public class OrderServiceImpl implements OrderService {
-
+	OrderDao orderDao = new OrderDaoImpl();
+	
 	@Override
 	public void addOrder(Order order) throws SQLException {
 		Connection conn = null;
@@ -23,7 +24,6 @@ public class OrderServiceImpl implements OrderService {
 			conn.setAutoCommit(false);
 			
 			//保存订单
-			OrderDao orderDao = new OrderDaoImpl();
 			orderDao.addOrder(conn, order);
 			
 			//保存订单项
@@ -40,7 +40,6 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public PageModel findMyOrdersWithPage(int current_page, User user) throws SQLException {
-		OrderDao orderDao = new OrderDaoImpl();
 		//获取该用户所有订单数
 		int totalRecords = orderDao.getTotalRecords(user);
 		PageModel pm = new PageModel(current_page, totalRecords, 3);
@@ -52,6 +51,16 @@ public class OrderServiceImpl implements OrderService {
 		pm.setUrl("OrderServlet?method=findMyOrdersWithPage");
 		
 		return pm;
+	}
+
+	@Override
+	public Order findOrderByOId(String order_id) throws SQLException {
+		return orderDao.findOrderByOId(order_id);
+	}
+
+	@Override
+	public void updateOrder(Order order) throws Exception{
+		orderDao.updateOrder(order);
 	}
 
 }
