@@ -12,6 +12,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.lang.StringUtils;
 
 import com.prg.store.dao.ProductDao;
+import com.prg.store.domain.Category;
 import com.prg.store.domain.Product;
 import com.prg.store.utils.JDBCUtils;
 import com.sun.corba.se.spi.orb.StringPair;
@@ -67,6 +68,13 @@ public class ProductDaoImpl implements ProductDao{
 		String sql = "select * from product where pid in ("+ all_id +") order by field(pid,"+all_id+")";
 		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
 		return runner.query(sql, new BeanListHandler<Product>(Product.class));
+	}
+
+	@Override
+	public void delProduct(Category category) throws Exception{
+		String sql = "update product set cid = ? where cid = ? ";
+		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
+		runner.update(sql, null,category.getCid());
 	}
 
 }

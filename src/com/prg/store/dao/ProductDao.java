@@ -2,6 +2,7 @@ package com.prg.store.dao;
 
 import java.util.List;
 
+import com.prg.store.domain.Category;
 import com.prg.store.domain.Product;
 
 public interface ProductDao {
@@ -17,5 +18,7 @@ public interface ProductDao {
 	List findProductsWithCidAndPage(String cid, int startIndex, int pageSize) throws Exception;
 
 	List<Product> findHistoryProducts(String[] ids) throws Exception;
+
+	void delProduct(Category category) throws Exception;
 
 }

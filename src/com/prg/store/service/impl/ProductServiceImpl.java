@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.prg.store.dao.ProductDao;
 import com.prg.store.dao.impl.ProductDaoImpl;
+import com.prg.store.domain.Category;
 import com.prg.store.domain.PageModel;
 import com.prg.store.domain.Product;
 import com.prg.store.service.ProductService;
@@ -42,6 +43,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> findHistoryProducts(String[] ids) throws Exception {
 		return productDao.findHistoryProducts(ids);
+	}
+
+	@Override
+	public void delProduct(Category category) throws Exception {
+		productDao.delProduct(category);
 	}
 
 }
