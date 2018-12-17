@@ -8,13 +8,14 @@ import com.prg.store.dao.impl.CategoryDaoImpl;
 import com.prg.store.domain.Category;
 import com.prg.store.service.CategoryService;
 import com.prg.store.service.ProductService;
+import com.prg.store.utils.BeanFactory;
 import com.prg.store.utils.JDBCUtils;
 import com.prg.store.utils.JedisUtils;
 
 import redis.clients.jedis.Jedis;
 
 public class CategoryServiceImpl implements CategoryService {
-	CategoryDao categoryDao = new CategoryDaoImpl();
+	CategoryDao categoryDao = (CategoryDao) BeanFactory.createObject("CategoryDao");
 	
 	@Override
 	public List<Category> findAllCats() throws Exception {

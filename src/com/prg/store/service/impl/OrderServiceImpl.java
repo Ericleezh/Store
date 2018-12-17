@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.prg.store.dao.CategoryDao;
 import com.prg.store.dao.OrderDao;
 import com.prg.store.dao.impl.OrderDaoImpl;
 import com.prg.store.domain.Order;
@@ -11,10 +12,11 @@ import com.prg.store.domain.OrderItem;
 import com.prg.store.domain.PageModel;
 import com.prg.store.domain.User;
 import com.prg.store.service.OrderService;
+import com.prg.store.utils.BeanFactory;
 import com.prg.store.utils.JDBCUtils;
 
 public class OrderServiceImpl implements OrderService {
-	OrderDao orderDao = new OrderDaoImpl();
+	OrderDao orderDao = (OrderDao) BeanFactory.createObject("OrderDao");
 	
 	@Override
 	public void addOrder(Order order) throws SQLException {

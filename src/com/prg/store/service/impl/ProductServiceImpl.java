@@ -2,15 +2,17 @@ package com.prg.store.service.impl;
 
 import java.util.List;
 
+import com.prg.store.dao.CategoryDao;
 import com.prg.store.dao.ProductDao;
 import com.prg.store.dao.impl.ProductDaoImpl;
 import com.prg.store.domain.Category;
 import com.prg.store.domain.PageModel;
 import com.prg.store.domain.Product;
 import com.prg.store.service.ProductService;
+import com.prg.store.utils.BeanFactory;
 
 public class ProductServiceImpl implements ProductService {
-	ProductDao productDao = new ProductDaoImpl();
+	ProductDao productDao = (ProductDao) BeanFactory.createObject("ProductDao");
 	
 	@Override
 	public List<Product> findHots() throws Exception {
