@@ -6,9 +6,13 @@ import java.sql.SQLException;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.prg.store.dao.UserDao;
 import com.prg.store.domain.User;
+import com.prg.store.utils.HibernateUtil;
 import com.prg.store.utils.JDBCUtils;
 import com.sun.xml.internal.bind.v2.TODO;
 
@@ -69,6 +73,22 @@ public class UserDaoImpl implements UserDao {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * 使用Hibernate
+	 */
+	@Override
+	public User login(String username, String password) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("from User where username = ? and password = ?");
+		query.setParameter(0, username);
+		query.setParameter(1, password);
+		User user = (User) query.uniqueResult();
+		transaction.commit();
+		
+		return user;
 	}
 
 }

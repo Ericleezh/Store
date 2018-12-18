@@ -14,4 +14,6 @@ public interface UserService {
 
 	Boolean checkNameExist(String username) throws SQLException;
 
+	User login(String username, String password);
+
 }
