@@ -21,4 +21,8 @@ public interface ProductDao {
 
 	void delProduct(Category category) throws Exception;
 
+	int findTotalRecordsByQuery();
+
+	List findAllProductsWithPage(int startIndex, int pageSize);
+
 }

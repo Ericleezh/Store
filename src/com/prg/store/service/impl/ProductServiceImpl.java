@@ -52,4 +52,17 @@ public class ProductServiceImpl implements ProductService {
 		productDao.delProduct(category);
 	}
 
+	@Override
+	public PageModel findAllProductsWithPage(int current_page) {
+		int totalRecords = productDao.findTotalRecordsByQuery();
+		PageModel pm = new PageModel(current_page, totalRecords, 8);
+		
+		List list = productDao.findAllProductsWithPage(pm.getStartIndex(), pm.getPageSize());
+		
+		
+		pm.setList(list);
+		pm.setUrl("AdminProductServlet?method=findAllPros");
+		return pm;
+	}
+
 }

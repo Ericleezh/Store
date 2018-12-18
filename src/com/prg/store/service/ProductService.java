@@ -20,4 +20,6 @@ public interface ProductService {
 
 	void delProduct(Category category) throws Exception;
 
+	PageModel findAllProductsWithPage(int current_page);
+
 }

@@ -10,10 +10,15 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Query;
+import org.hibernate.ScrollableResults;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.prg.store.dao.ProductDao;
 import com.prg.store.domain.Category;
 import com.prg.store.domain.Product;
+import com.prg.store.utils.HibernateUtil;
 import com.prg.store.utils.JDBCUtils;
 import com.sun.corba.se.spi.orb.StringPair;
 
@@ -75,6 +80,34 @@ public class ProductDaoImpl implements ProductDao{
 		String sql = "update product set cid = ? where cid = ? ";
 		QueryRunner runner = new QueryRunner(JDBCUtils.getDataSource());
 		runner.update(sql, null,category.getCid());
+	}
+
+	@Override
+	public int findTotalRecordsByQuery() {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		
+		Query query = session.createQuery("from Product");
+		//得到滚动集
+		ScrollableResults scroll = query.scroll();
+		//滚动到最后一行
+		scroll.last();
+		//从0开始，故要+1
+		int count = scroll.getRowNumber() + 1;
+		transaction.commit();
+		
+		return count;
+	}
+
+	@Override
+	public List findAllProductsWithPage(int startIndex, int pageSize) {
+		Session session = HibernateUtil.getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("from Product");
+		query.setFirstResult(startIndex);
+		query.setMaxResults(pageSize);
+		List list = query.list();
+		return list;
 	}
 
 }

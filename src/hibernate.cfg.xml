@@ -40,6 +40,8 @@
 		
 		<!-- 引入映射 -->
 		<mapping resource="com/prg/store/domain/User.hbm.xml"/>
+		<mapping resource="com/prg/store/domain/Category.hbm.xml"/>
+		<mapping resource="com/prg/store/domain/Product.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>

@@ -27,6 +27,14 @@ public class PageModel {
 	//完善属性
 	private String url;
 
+	@Override
+	public String toString() {
+		return "PageModel [currentPageNum=" + currentPageNum + ", pageSize=" + pageSize + ", totalRecords="
+				+ totalRecords + ", totalPageNum=" + totalPageNum + ", startIndex=" + startIndex + ", prePageNum="
+				+ prePageNum + ", nextPageNum=" + nextPageNum + ", list=" + list + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", url=" + url + "]";
+	}
+
 	//要使用分页，必须传两个参数。一个是要看哪一页，另一个是总记录条数
 	public PageModel(int currentPageNum,int totalRecords,int pageSize){
 		this.currentPageNum = currentPageNum;

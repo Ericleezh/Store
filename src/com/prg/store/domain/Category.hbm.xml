@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.prg.store.domain.Category" table="category" >
+		<!-- id映射 -->
+		<id name="cid" column="cid">
+			<!-- 主键生成策略 -->
+			<generator class="assigned"></generator>
+		</id>
+		
+		<!-- 普通字段 -->
+		<property name="cname" column="cname"/>
+		
+		<set name="products" cascade="save-update,delete" inverse="false">
+			<key column="cid"/>
+			<one-to-many class="com.prg.store.domain.Product" />
+		</set>
+	</class>
+</hibernate-mapping>
